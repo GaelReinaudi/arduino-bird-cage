@@ -8,13 +8,13 @@ const int pinServoFront = 1;
 const int buttonPin = 15;
 const int ledPin =  16;
 
-const int posLeftOpen = 195;
-const int posLeftClose = 10;
-const int posFrontOpen = 10;
-const int posFrontClose = 195;
+const int posLeftOpen = 10;
+const int posLeftClose = 195;
+const int posFrontOpen = 195;
+const int posFrontClose = 10;
 
 const int posRefMax = 100;
-int pos = posRefMax / 2;
+int pos = 0;
 
 int posLeft(int posRef)
 {
@@ -37,6 +37,9 @@ void setup()
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
   updateServo(pos);
+  delay(500);
+  servoLeft.detach();
+  servoFront.detach();
   digitalWrite(ledPin, LOW);
 }
 
