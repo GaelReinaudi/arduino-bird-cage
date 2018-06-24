@@ -45,30 +45,32 @@ void loop()
 { 
   int button = digitalRead(buttonPin);
   int incPos = 0;
-//  if (!button == LOW)
-//    return;
   if (button == HIGH) {
     digitalWrite(ledPin, LOW);
   } else {
     digitalWrite(ledPin, HIGH);
   }
+  if (button == LOW)
+    return;
     
   if (pos <= posRefMax / 2 && button == HIGH)
     incPos = 1;
   if (posRefMax - pos <= posRefMax / 2 && button == HIGH)
     incPos = -1;
 
-//  servoLeft.attach(pinServoLeft);
-//  servoFront.attach(pinServoFront);
-
-  while(pos > 0 and pos < posRefMax)
+  if (incPos) {
+    servoLeft.attach(pinServoLeft);
+    servoFront.attach(pinServoFront);
+  }
+  while(incPos)
   {
     pos += incPos;
-    servoLeft.write(pos);
-    delay(15);
+    updateServo(pos);
+    delay(20);
+    if (pos <= 0 || pos >= posRefMax)
+      break;
   }
-  incPos = 0;
-//  servoLeft.detach();
-//  servoFront.detach();
+  servoLeft.detach();
+  servoFront.detach();
 } 
 
