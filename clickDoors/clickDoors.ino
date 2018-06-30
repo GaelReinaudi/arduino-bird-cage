@@ -4,7 +4,7 @@ Servo servoLeft;
 Servo servoFront;
 
 const int pinServoLeft = 2;
-const int pinServoFront = 1;
+const int pinServoFront = 3;
 const int buttonPin = 15;
 const int ledPin =  16;
 
